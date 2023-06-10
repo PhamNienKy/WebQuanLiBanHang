@@ -1,0 +1,41 @@
+﻿@model IEnumerable<WebsiteQuanLyBanHang.Models.SanPham>
+
+<div class=" h_menu4">
+    <ul class="memenu skyblue">
+        <li class="showhide" style="display: list-item;"><span class="title">MENU</span><span class="icon1"></span><span class="icon2"></span></li>
+        <li class="active grid" style="display: none;"><a class="color8" href="@Url.Action("Index","Home")">Trang chủ</a></li>
+        @foreach (var groupitem in Model.GroupBy(n => n.LoaiSanPham))
+        {
+            if (groupitem.Key != null)
+            {
+                <li style="display: none;">
+                    <a class="color1" href="@Url.Action("LoadSanPham","Home", new { tenloai = groupitem.Key.TenLoai,tenNSX="" })">@groupitem.Key.TenLoai</a>
+                    <div class="mepanel" style="display: none; opacity: 1;">
+                        <div class="row">
+                            <div class="col1">
+                                <div class="h_nav">
+                                    <ul>
+                                        @foreach (var item in groupitem.GroupBy(n => n.NhaSanXuat))
+                                        {
+                                            if (item.Key != null)
+                                            {
+                                                <li><a href="@Url.Action("LoadSanPham","Home", new { tenloai = groupitem.Key.TenLoai, tenNSX = item.Key.TenNSX })">@item.Key.TenNSX</a></li>
+                                            }
+
+                                        }
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+
+
+
+            }
+        }
+        
+        <li style="display: none;"><a class="color4" href="blog.html">Giới thiệu</a></li>
+        <li style="display: none;"><a class="color6" href="contact.html">Liên hệ </a></li>
+    </ul>
+</div>

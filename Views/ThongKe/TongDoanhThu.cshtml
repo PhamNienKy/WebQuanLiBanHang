@@ -1,0 +1,54 @@
+﻿@using WebsiteQuanLyBanHang.Models;
+@model IEnumerable<DonDatHang>
+@{
+    ViewBag.Title = "TongDoanhThu";
+    Layout = "~/Views/Shared/_AdminnLayout.cshtml";
+}
+<h2 style="position:absolute;left:47%;">Tổng doanh thu</h2>
+<br /><hr />
+@if (Model == null || Model.Count() == 0)
+{
+}
+else
+{
+    <table class="table">
+        <tr style="background:rgb(226, 105, 232)">
+            <td>Mã đơn</td>
+            <td>Mã khách hàng</td>
+            <td>Tên khách hàng</td>
+            <td>Ngày đặt</td>
+            <td>Ngày giao</td>
+            <td>Tổng tiền đơn</td>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.MaDDH</td>
+                <td>@item.MaKH</td>
+                <td>@item.KhachHang.TenKH</td>
+                <td>@item.NgayDat.Value.ToString("dd/MM/yyyy")</td>
+                @if (item.NgayGiao != null)
+                {
+                    <td>@item.NgayGiao.Value.ToString("dd/MM/yyyy")</td>
+                }
+                else
+                {
+                    <td></td>
+                }
+
+                <td>@item.ChiTietDonDatHangs.Sum(n => n.SanPham.DonGia).Value.ToString("#,##")</td>
+            </tr>
+        }
+
+        <tr style="font-weight: bold; background: rgb(226, 105, 232)">
+            <td style="text-align:left;">Tổng doanh thu:</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>@ViewBag.TongDoanhThu.ToString("#,##")K VND</td>
+        </tr>
+    </table>
+}
+

@@ -1,0 +1,36 @@
+﻿@using WebsiteQuanLyBanHang.Models
+    <div style=" background: #377099;" class="header-top">
+        <div class="container">
+            <div class="search">
+                @using(Html.BeginForm("KQTimKiem", "Search")) {
+                    <input type="text"name="sTuKhoa" placeholder="Tên sản phẩm">
+                    <input type="submit" value="Tìm kiếm">
+                }
+            </div>
+            <div class="header-left">
+                <ul>
+                    @if (Session["TaiKhoan"] != null)
+                    {
+                        ThanhVien tv = (ThanhVien)Session["TaiKhoan"];
+                        <li style=" color: #e53d3dad; ">@tv.HoTen</li>
+                        @Html.ActionLink("Đăng xuất ", "DangXuat", "DangNhap")
+
+                    }
+                    else
+                    {
+                        <li><a href="@Url.Action("Index","DangNhap")"> Đăng nhập </a></li>
+                        <li><a href="@Url.Action("Dangky","Home")"> Đăng ký </a></li>
+                    }
+
+
+                    @Html.Action("GioHangPartial", "GioHang")
+                  
+
+                </ul>
+                
+                <div class="clearfix"> </div>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+    </div>
+ 

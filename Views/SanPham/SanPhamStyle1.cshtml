@@ -1,0 +1,16 @@
+﻿@using WebsiteQuanLyBanHang.Models
+@model IEnumerable<SanPham>
+
+
+@foreach (var item in Model.Take(2))
+{
+    <div class="col-md-4 grid-top">
+        <a href="@Url.Action("XemChiTietSp","SanPham", new { id = item.MaSP })" class="b-link-stripe b-animate-go  thickbox">
+            <img class="img-responsive" src=@Url.Content("~/content/HinhAnhSP/"+item.HinhAnh) alt="">
+        </a>
+
+        <p><a href="~/Controllers/SanPham/XemChiTietSp">@item.TenSP</a></p>
+    </div>
+}
+<div class="clearfix"> </div>
+

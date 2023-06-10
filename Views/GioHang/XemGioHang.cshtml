@@ -1,0 +1,142 @@
+﻿@using WebsiteQuanLyBanHang.Models;
+
+@model IEnumerable<ItemGioHang>
+
+@{
+    ViewBag.Title = "XemGioHang";
+    Layout = "~/Views/Shared/_ProductLayout.cshtml";
+}
+
+@if (Model == null || Model.Count() == 0)
+{
+
+    <h1 style="text-align:center;">My Shopping </h1>
+    <br />
+    <h3 style="text-align:center;">(Rỗng)</h3>
+}
+else
+{
+    <h1 style="text-align:center;">My Shopping </h1>
+    <br />
+
+    <table>
+        <tr>
+            <td style=" width: 140px">Hình ảnh </td>
+            <td style="text-align: center; width: 260px">Sản phẩm</td>
+            <td style="text-align: center; width: 150px">Số lượng</td>
+            <td style="text-align: center; width: 150px ">Đơn giá </td>
+            <td style="text-align: center; width: 150px ">Tổng</td>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <img src="@Url.Content("~/Content/HinhAnhSP/"+ item.HinhAnh)" width="110" height="90" />
+                </td>
+                <td style="text-align: center;">@item.TenSp</td>
+
+                <td style="text-align: center;">@item.SoLuongSp</td>
+                <td style="text-align: center;">@item.DonGia.ToString("#,##") VNĐ</td>
+                <td style="text-align: center;">@item.ThanhTien.ToString("#,##") VNĐ</td>
+                <td>@Html.ActionLink("Sửa", "SuaGioHang", new { @MaSp = item.MaSp })||@Html.ActionLink("Xóa", "XoaGioHang", new { @MaSp = item.MaSp })</td>
+            </tr>
+        }
+    </table>
+
+    using (Html.BeginForm("DatHang", "GioHang"))
+    {
+        if (Session["TaiKhoan"] == null)
+        {
+
+            <div class="ThongTinMuaHang">
+                <table align="center">
+                    <tr>
+                        <td align="center" colspan="2"><h3>Thông tin khách hàng </h3><br /></td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: left; width: 170px; height: 40px">Họ tên </td>
+                        <td>
+                            @Html.TextBox("TenKH")
+                            <p style="color:red" id="TB_TenKH"></p>
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <td style="text-align: left; width: 170px;height:40px ">Địa chỉ</td>
+                        <td>
+                            @Html.TextArea("DiaChi")
+                            <p style="color:red" id="TB_DiaChi"></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: left; width: 170px; height: 40px">Email</td>
+                        <td>
+                            @Html.TextArea("Email")
+                            <p style="color:red" id="TB_Email"></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: left; width: 170px; height: 40px ">Số điện thoại</td>
+                        <td>
+                            @Html.TextArea("SDT")
+                            <p style="color:red" id="TB_SDT"></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>@Html.Hidden("MaThanhVien", 1)</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="divDatHang" style="text-align:right;">
+                <input type="submit" value="Đặt hàng" class="btn btn-danger" id="btnDatHang" style="height:50px;width: 150px;font-weight:300" />
+            </div>
+        }
+        else
+        {
+            <div class="divDatHang" style="text-align:right;">
+                <input type="submit" value="Đặt hàng" class="btn btn-danger" style="height:50px;width: 150px;font-weight:300" />
+            </div>
+        }
+    }
+}
+<script>
+    $("#btnDatHang").click(function () {
+        var loi = 0;
+        if ($("#TenKH").val() == "") {
+            $("#TB_TenKH").text("Tên khách hàng không được để trống!");
+            loi++;
+        }
+        else {
+
+            $("#TB_TenKH").text("");
+        }
+        if ($("#DiaChi").val() == "") {
+            $("#TB_DiaChi").text("Địa chỉ  khách hàng không được để trống!");
+        }
+        else {
+            loi++;
+            $("#TB_DiaChi").text("");
+        }
+        if ($("#Email").val() == "") {
+            $("#TB_Email").text("Emai không được để trống!");
+            loi++;
+        }
+        else {
+
+            $("#TB_Email").text("");
+        }
+        if ($("#SDT").val() == "") {
+            $("#TB_SDT").text("Số điện thoại không được để trống!");
+            loi++;
+        }
+        else {
+            $("#TB_SDT").text("");
+        }
+        if (loi != 0) {
+            return false;
+        }
+    });
+</script>
+

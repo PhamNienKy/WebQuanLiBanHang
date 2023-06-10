@@ -1,0 +1,176 @@
+﻿@using WebsiteQuanLyBanHang.Models;
+@model IEnumerable<DonDatHang>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminnLayout.cshtml";
+    WebGrid grid = new WebGrid(source: Model, rowsPerPage: 20);
+}
+
+<div class="row">
+    <div class="col-lg-3 col-6">
+        <!-- small box -->
+        <div class="small-box bg-info">
+            <div class="inner">
+                <h3>@ViewBag.TongDonHang</h3>
+
+                <p>Đơn hàng</p>
+            </div>
+            <div class="icon">
+                <i class="ion ion-bag"></i>
+            </div>
+            <a href="#" class="small-box-footer">Xem thêm chi tiết <i class="fas fa-arrow-circle-right"></i></a>
+        </div>
+    </div>
+    <!-- ./col -->
+    <div class="col-lg-3 col-6">
+        <!-- small box -->
+        <div class="small-box bg-success">
+            <div class="inner">
+
+                <h3>@ViewBag.TongDoanhThu.ToString("#,##") K</h3>
+
+                <p>Doanh thu</p>
+            </div>
+            <div class="icon">
+                <i class="ion ion-stats-bars"></i>
+            </div>
+            <a href="@Url.Action("TongDoanhThu", "ThongKe")" class="small-box-footer">Xem thêm chi tiết<i class="fas fa-arrow-circle-right"></i></a>
+        </div>
+    </div>
+    <!-- ./col -->
+    <div class="col-lg-3 col-6">
+        <!-- small box -->
+        <div class="small-box bg-warning">
+            <div class="inner">
+                <h3>@ViewBag.TongThanhVien</h3>
+
+                <p>Thành viên</p>
+            </div>
+            <div class="icon">
+                <i class="ion ion-person-add"></i>
+            </div>
+            <a href="@Url.Action("ThanhVien","ThongKe")" class="small-box-footer">Xem thêm chi tiết<i class="fas fa-arrow-circle-right"></i></a>
+        </div>
+    </div>
+    <!-- ./col -->
+    <div class="col-lg-3 col-6">
+        <!-- small box -->
+        <div class="small-box bg-danger">
+            <div class="inner">
+                <h3>@ViewBag.SoNguoiTruyCap</h3>
+
+                <p>Người truy cập</p>
+            </div>
+            <div class="icon">
+                <i class="ion ion-pie-graph"></i>
+            </div>
+            <a href="#" class="small-box-footer">Xem thêm chi tiết<i class="fas fa-arrow-circle-right"></i></a>
+        </div>
+    </div>
+    <!-- ./col -->
+</div>
+<h3 style="text-align:center">Thống kê</h3>
+<hr />
+@using (Html.BeginForm())
+{
+    <div>
+        <table>
+            <tr>
+                <td>
+                    <div class="col-md-2">
+                        Tháng:
+                    </div>
+                </td>
+                <td>
+                    <div class="col-md-2">
+                        Năm:
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="col-md-12">
+
+                        <select id="monthSelect" name="thang">
+                            <option value="0">-- Chọn tháng--</option>
+                            @for (int month = 12; month >= 1; month--)
+                            {
+                                <option value="@month">@month</option>
+                            }
+                        </select>
+                    </div>
+
+                </td>
+                <td>
+                    <div class="col-md-12">
+
+                        <select id="yearSelect" name="nam">
+                            <option value="">-- Chọn năm --</option>
+                            @for (int year = DateTime.Now.Year; year >= 2020; year--)
+                            {
+                                <option value="@year">@year</option>
+                            }
+                        </select>
+                    </div>
+                </td>
+                <td>
+                    <div class="col-md-2">
+                        <input type="submit" class="btn-danger" value="Xem kết quả">
+                    </div>
+                </td>
+            </tr>
+
+        </table>
+
+        <hr />
+    </div>
+}
+@if (Model == null || Model.Count() == 0)
+{
+
+
+    <br />
+    <h3 style="text-align:center;">Không có đơn hàng trong thời gian này</h3>
+}
+else
+{
+    <table class="table">
+        <tr style="font-weight: bold; background: rgb(226, 105, 232)">
+            <td>Mã đơn</td>
+            <td>Mã khách hàng</td>
+            <td>Tên khách hàng</td>
+            <td>Ngày đặt</td>
+            <td>Ngày giao</td>
+            <td>Tổng tiền đơn</td>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.MaDDH</td>
+                <td>@item.MaKH</td>
+                <td>@item.KhachHang.TenKH</td>
+                <td>@item.NgayDat.Value.ToString("dd/MM/yyyy")</td>
+                @if (item.NgayGiao != null)
+                {
+                    <td>@item.NgayGiao.Value.ToString("dd/MM/yyyy")</td>
+                }
+                else
+                {
+                    <td></td>
+                }
+
+                <td>@item.ChiTietDonDatHangs.Sum(n => n.SanPham.DonGia).Value.ToString("#,##")</td>
+            </tr>
+        }
+
+        <tr style="font-weight: bold; background: rgb(226, 105, 232)">
+            <td style="text-align:left;">Tổng doanh thu:</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td >@ViewBag.TongThongKe.ToString("#,##") VND</td>
+        </tr>
+    </table>
+}

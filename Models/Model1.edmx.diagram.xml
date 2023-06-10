@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="3f3dd022a85148c8a437c3a7ade40380" Name="Diagram1" ZoomLevel="48">
+        <EntityTypeShape EntityType="WebQuanLyBanHangModel.BinhChon" Width="1.5" PointX="5.25" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebQuanLyBanHangModel.BinhLuan" Width="1.5" PointX="5.25" PointY="11.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebQuanLyBanHangModel.ChiTietDonDatHang" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebQuanLyBanHangModel.ChiTietPhieuNhap" Width="1.5" PointX="5.25" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebQuanLyBanHangModel.DonDatHang" Width="1.5" PointX="3" PointY="14.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebQuanLyBanHangModel.KhachHang" Width="1.5" PointX="0.75" PointY="15" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebQuanLyBanHangModel.LoaiSanPham" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebQuanLyBanHangModel.LoaiThanhVien" Width="1.5" PointX="1.5" PointY="23.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebQuanLyBanHangModel.NhaCungCap" Width="1.5" PointX="0.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebQuanLyBanHangModel.NhaSanXuat" Width="1.5" PointX="0.75" PointY="11.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebQuanLyBanHangModel.PhieuNhap" Width="1.5" PointX="3" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebQuanLyBanHangModel.QuangCao" Width="1.5" PointX="7.75" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebQuanLyBanHangModel.SanPham" Width="1.5" PointX="3" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebQuanLyBanHangModel.sysdiagram" Width="1.5" PointX="7.75" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebQuanLyBanHangModel.TinTuc" Width="1.5" PointX="7.75" PointY="9.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebQuanLyBanHangModel.ThanhVien" Width="1.5" PointX="1.5" PointY="18.625" IsExpanded="true" />
+        <AssociationConnector Association="WebQuanLyBanHangModel.FK_BinhChon_SanPham" ManuallyRouted="false" />
+        <AssociationConnector Association="WebQuanLyBanHangModel.FK_BinhLuan_SanPham" ManuallyRouted="false" />
+        <AssociationConnector Association="WebQuanLyBanHangModel.FK_ChiTietDonDatHang_DonDatHang" ManuallyRouted="false" />
+        <AssociationConnector Association="WebQuanLyBanHangModel.FK_ChiTietDonDatHang_SanPham" ManuallyRouted="false" />
+        <AssociationConnector Association="WebQuanLyBanHangModel.FK_ChiTietPhieuNhap_PhieuNhap" ManuallyRouted="false" />
+        <AssociationConnector Association="WebQuanLyBanHangModel.FK_ChiTietPhieuNhap_SanPham" ManuallyRouted="false" />
+        <AssociationConnector Association="WebQuanLyBanHangModel.FK_DonDatHang_KhachHang" ManuallyRouted="false" />
+        <AssociationConnector Association="WebQuanLyBanHangModel.FK_KhachHang_ThanhVien" ManuallyRouted="false" />
+        <AssociationConnector Association="WebQuanLyBanHangModel.FK_SanPham_LoaiSanPham" ManuallyRouted="false" />
+        <AssociationConnector Association="WebQuanLyBanHangModel.FK_ThanhVien_LoaiThanhVien" ManuallyRouted="false" />
+        <AssociationConnector Association="WebQuanLyBanHangModel.FK_PhieuNhap_NhaCungCap" ManuallyRouted="false" />
+        <AssociationConnector Association="WebQuanLyBanHangModel.FK_SanPham_NhaCungCap" ManuallyRouted="false" />
+        <AssociationConnector Association="WebQuanLyBanHangModel.FK_SanPham_NhaSanXuat" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="WebQuanLyBanHangModel.LoaiThanhVien_Quyen" Width="1.5" PointX="3.75" PointY="23.375" />
+        <EntityTypeShape EntityType="WebQuanLyBanHangModel.Quyen" Width="1.5" PointX="1.5" PointY="26.625" />
+        <AssociationConnector Association="WebQuanLyBanHangModel.FK_LoaiThanhVien_Quyen_LoaiThanhVien" />
+        <AssociationConnector Association="WebQuanLyBanHangModel.FK_LoaiThanhVien_Quyen_Quyen" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

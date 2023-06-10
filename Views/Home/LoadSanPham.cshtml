@@ -1,0 +1,39 @@
+﻿@using WebsiteQuanLyBanHang.Models
+@model IEnumerable<SanPham>
+@{
+    ViewBag.Title = "LoadSanPham";
+    Layout = "~/Views/Shared/_ProductLayout.cshtml";
+}
+@{
+    IEnumerable<SanPham> listSP = (IEnumerable<SanPham>)ViewBag.listSP;
+
+}
+<div class="col-md-9 product1">
+    <div class=" bottom-product">
+        @if (listSP != null)
+        {
+            foreach (var item in listSP.Where(item => item != null))
+            {
+                <div class="col-md-4 bottom-cd simpleCart_shelfItem">
+                    <div class="product-at ">
+                        <a href="@Url.Action("XemChiTietSp","SanPham", new { id = item.MaSP })">
+                            <img class="img-responsive" src="@Url.Content("~/content/HinhAnhSP/"+item.HinhAnh)" alt=""  style="width:300px;height:150px;">
+                            <div class="pro-grid">
+                                <span class="buy-in">Mua ngay</span>
+                            </div>
+                        </a>
+                    </div>
+                    <p class="tun">@item.TenSP</p>
+                    <a href="@Url.Action("XemChiTietSp","SanPham",  new { id = item.MaSP  })" 
+                       style="font-size: 1.1em; color: #FFF; text-align: center;  padding: 0.5em 1em; margin: 0; text-decoration: none; font-family: 'Roboto', sans-serif; "><p class="number item_price" style="background: #EF5F21;"><i> </i>@item.DonGia.ToString() VND</p></a>
+                </div>
+            }
+
+        }
+        else
+            {
+                
+            }
+    </div>
+
+</div>

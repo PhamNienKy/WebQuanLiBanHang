@@ -1,0 +1,67 @@
+﻿@model WebsiteQuanLyBanHang.Models.SanPham
+
+@{
+    ViewBag.Title = "Xoa";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h3>Bạn chắc chắn muốn xóa sản phẩm?</h3>
+@using (Html.BeginForm("Xoa", "QuanLySanPham", new { @MaSP=Model.MaSP }))
+{
+    @Html.AntiForgeryToken()
+    <div>
+        <hr />
+        <dl class="dl-horizontal">
+
+            <dt>
+                Tên sản phẩm
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.TenSP)
+            </dd>
+
+            <dt>
+                Hình ảnh
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.HinhAnh)
+            </dd>
+            <dt>
+                Nhà cung cấp
+
+            </dt>
+
+            <dd>
+                @Html.DropDownList("MaNCC", null, new { @class = "form-control" })
+            </dd>
+
+            <dt>
+                Nhà sản xuất
+
+            </dt>
+
+            <dd>
+                @Html.DropDownList("MaNSX", null, new { @class = "form-control" })
+            </dd>
+
+            <dt>
+                Loại sản phẩm
+            </dt>
+
+            <dd>
+                @Html.DropDownList("MaLoaiSP", null, new { @class = "form-control" })
+            </dd>
+
+        </dl>
+
+
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Xóa " class="btn btn-info" /> |
+            @Html.ActionLink("Trở về trang chủ", "Index")
+        </div>
+        
+    </div>
+}

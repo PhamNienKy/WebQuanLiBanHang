@@ -1,0 +1,40 @@
+﻿@model WebsiteQuanLyBanHang.Models.ThanhVien
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_ProductLayout.cshtml";
+}
+<link href="~/Content/css/StyleRegister.css" rel="stylesheet" />
+
+<div class="container">
+    <div class="account">
+        <h1 style="text-align: left;">Đăng nhập tài khoản</h1>
+        <div class="account-pass">
+            <div class="col-md-8 account-top">
+                @using (Html.BeginForm("Index", "DangNhap", FormMethod.Post))
+                {
+                    <span style="color:red">@ViewBag.error</span>
+
+                    <div>
+                        <span>Tên đăng nhập</span>
+                        @Html.TextBox("TaiKhoan")
+                        @Html.ValidationMessageFor(model => model.TaiKhoan, "", new { @class = "text-danger" })
+                    </div>
+                    <div>
+                        <span>Mật khẩu</span>
+                        @Html.Password("MatKhau")
+                        @Html.ValidationMessageFor(model => model.MatKhau, "", new { @class = "text-danger" })
+                    </div>
+                    <input type="submit" value="Đăng nhập ">
+                    //<br />
+                }
+                <hr />
+                <div style="text-align:inherit"> Chưa có tài khoản-><a href="@Url.Action("Dangky","Home")" class="create">Đăng ký ngay</a></div>
+                <div class="clearfix"> </div>
+            </div>
+            
+            <div class="clearfix"> </div>
+        </div>
+    </div>
+
+</div>
+

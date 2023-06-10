@@ -1,0 +1,124 @@
+﻿@using WebsiteQuanLyBanHang.Models;
+@model PhieuNhap
+@{
+    ViewBag.Title = "NhapHang";
+    Layout = "~/Views/Shared/_AdminnLayout.cshtml";
+}
+@{
+    IEnumerable<NhaCungCap> lstNCC = ViewBag.MaNCC as IEnumerable<NhaCungCap>;
+}
+<h2 style="position: absolute; left: 47%;">Nhập hàng</h2>
+<br />
+<br />
+<hr />
+<div class="clearfix"></div>
+<br />
+@using (Html.BeginForm("NhapHang", "QuanLyPhieuNhap"))
+{
+    <div class="row">
+        <div class="ThongTinPhieuNhap col-md-12">
+            <div class="col-md-2">
+                Nhà cung cấp
+            </div>
+            <div class="col-md-5">
+                <select class="MaNCC" name="MaNCC">
+                    @{
+                        foreach (var item in lstNCC)
+                        {
+                            <option value="@item.MaNCC">@item.TenNCC</option>
+                        }
+                    }
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <br />
+
+    <div class="col-md-12">
+        <div class="col-md-3">
+
+        </div>
+        <div class="col-md-10">
+            Ngày nhập:
+            <input type="date" name="NgayNhap" class="date" />
+        </div>
+    </div>
+    <hr />
+
+
+    <table class="table tblChiTietPhieuNhap">
+        @{
+            IEnumerable<SanPham> lstSanPham = ViewBag.ListSanPham as IEnumerable<SanPham>;
+        }
+
+
+        <tr class="trAppend" style="display:none">
+            <td>
+                <select class="ddlSanPham" name="">
+                    @foreach (var item in lstSanPham)
+                    {
+                        <option value="@item.MaSP">@item.TenSP</option>
+                    }
+                </select>
+            </td>
+            <td>
+                <input name="" class="txtDonGia" value="0" />
+            </td>
+            <td>
+                <input name="" class="txtSoLuong" value="0" />
+            </td>
+            @*<td>
+                <input type="button" class="btn btn-danger" id="btnDeletee"value="-" style="width:35px;height:35px;" />
+            </td>*@
+        </tr>
+        <tr data-id="-1">
+            <td>Sản phẩm </td>
+            <td>Đơn giá nhập </td>
+            <td>Số lượng </td>
+        </tr>
+    </table>
+    <input type="button" value="+" class="btn btn-success" id="btnAdd" />
+    <br />
+    <input type="submit" value="Nhập hàng" class="btn btn-primary" id="btnNhapHang" style="position: absolute; left: 50%;" />
+
+}
+<script>
+    var input = document.getElementById('btnAdd');
+    input.onclick = function () {
+        var id_cuoi = $(".tblChiTietPhieuNhap").find("tr:last-child").attr("data-id");
+        var i = parseInt(id_cuoi) + 1;
+        var tdNoiDung = $(".trAppend").html();
+        var trNoiDung = "<tr class=\"trAppended\" data-id=\"" + i + "\">" + tdNoiDung + "</tr>";
+        $(".tblChiTietPhieuNhap").append(trNoiDung);
+        loadIdLenThe();
+    };
+    function loadIdLenThe() {
+        $(".trAppended").each(function () {
+            var id = $(this).attr("data-id");
+            var nameMaSanPham = "[" + id + "].MaSP";
+            var nameSoLuongNhap = "[" + id + "].SoLuongNhap";
+            var nameDonGiaNhap = "[" + id + "].DonGiaNhap";
+            $(this).find(".ddlSanPham").prop("name", nameMaSanPham);
+            $(this).find(".txtDonGia").prop("name", nameDonGiaNhap);
+            $(this).find(".txtSoLuong").prop("name", nameSoLuongNhap);
+        })
+    };
+    //$("#btnAdd").click(function () {
+    //
+    //    var tdNoiDung = $(".trAppend").html();
+    //    var trNoiDung = "<tr class=\"trAppended\" data-id=\"" + "" + "\">" + tdNoiDung + "</tr>";
+    //    $(".tblChiTietPhieuNhap").append(trNoiDung);
+    //    alert("aaaa");
+    //});
+
+    //$("body").delegate(".btnDelete", "click", function () {
+    //    $(this).closest(".trAppended").remove();
+
+    //});
+    //var input1 = document.getElementById('btnDeletee');
+    //input1.onclick = function () {
+    //    $(this).closest(".trAppended").remove();
+    //};
+
+</script>

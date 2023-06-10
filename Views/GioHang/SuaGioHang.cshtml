@@ -1,0 +1,78 @@
+﻿@using WebsiteQuanLyBanHang.Models
+@model ItemGioHang
+@{
+    ViewBag.Title = "SuaGioHang";
+    Layout = "~/Views/Shared/_ProductLayout.cshtml";
+}
+
+@{
+    List<ItemGioHang> lstGioHang = ViewBag.GioHang as List<ItemGioHang>;
+
+    <h1 style="text-align:center;">My Shopping </h1>
+    <br />
+
+    <table>
+        <tr>
+            
+            <td style=" width: 140px">Hình ảnh </td>
+            <td style="text-align: center; width: 260px">Sản phẩm</td>
+            <td style="text-align: center; width: 150px">Số lượng</td>
+            <td style="text-align: center; width: 150px ">Đơn giá </td>
+            <td style="text-align: center; width: 150px ">Tổng</td>
+            <td></td>
+        </tr>
+
+        @foreach (var item in lstGioHang)
+        {
+
+            if (Model.MaSp == item.MaSp)
+            {
+                using (Html.BeginForm("CapNhatGioHang", "GioHang", new { @MaSP = item.MaSp, SoLuong = item.SoLuongSp }))
+                {
+
+                    <tr>
+                        @Html.Hidden("MaSP", item.MaSp)
+                        <td>
+                            <img src="@Url.Content("~/Content/HinhAnhSP/" + item.HinhAnh)" width="110" height="90" />
+                        </td>
+                        <td style="text-align: center;">@item.TenSp</td>
+
+                        <td>@Html.TextBox("SoLuong", item.SoLuongSp,new {@class="SoLuongThayDoi" })
+                            <p id="TB_SoLuongThayDoi" style="color:red"></p>
+                        </td>
+                       
+                        <td style="text-align: center;">@item.DonGia.ToString("#,##") VNĐ</td>
+                        <td style="text-align: center;">@item.ThanhTien.ToString("#,##") VNĐ</td>
+                        <td><input type="submit" value="Cập nhật" id="btn_CapNhat" style="background-color:blueviolet;color:white" /></td>
+                    </tr>
+                }
+
+            }
+            else
+            {
+                <tr>
+                    
+                    <td>
+                        <img src="@Url.Content("~/Content/HinhAnhSP/" + item.HinhAnh)" width="110" height="90" />
+                    </td>
+                    <td style="text-align: center;">@item.TenSp</td>
+
+                    <td style="text-align: center;">@item.SoLuongSp</td>
+                    <td style="text-align: center;">@item.DonGia.ToString("#,##") VNĐ</td>
+                    <td style="text-align: center;">@item.ThanhTien.ToString("#,##") VNĐ</td>
+                    <td>@Html.ActionLink("Sửa", "SuaGioHang", new { @MaSp = item.MaSp })||@Html.ActionLink("Xóa", "XoaGioHang", new { @MaSp = item.MaSp })</td>
+                </tr>
+            }
+        }
+    </table>
+    }
+<script>
+    $("#btn_CapNhat").click(function () {
+        var soluong = $(".SoLuongThayDoi").val();
+        if (isNaN(soluong) == true || soluong < 0) {
+            $("#TB_SoLuongThayDoi").text("Số lượng không hợp lệ!");
+            return false;
+        }
+    });
+</script>
+

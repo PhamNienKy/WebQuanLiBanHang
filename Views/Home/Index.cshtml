@@ -1,0 +1,33 @@
+﻿@using WebsiteQuanLyBanHang.Models
+@model IEnumerable<SanPham>
+@{
+    ViewBag.Title = "Home Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{
+    IEnumerable<SanPham> listDTM = (IEnumerable<SanPham>)ViewBag.dsDTM;
+    IEnumerable<SanPham> listLTM = (IEnumerable<SanPham>)ViewBag.dsLTM;
+    IEnumerable<SanPham> listMTBM = (IEnumerable<SanPham>)ViewBag.dsMTBM;
+}
+<div class="content-top">
+    <h1>Điện thoại mới nhất </h1>
+    <div class="grid-in">
+        <div class="container">
+            @Html.Partial("~/Views/SanPham/SanPhamStyle1.cshtml", listDTM)
+
+        </div>
+    </div>
+    <br /><br />
+    <h1>Máy tính bảng mới nhất </h1>
+    <div class="grid-in">
+        <div class="container">
+            @Html.Partial("~/Views/SanPham/SanPhamStyle1.cshtml", listMTBM)
+        </div>
+    </div>
+    <br /><br />
+    <div class="grid-in">
+        <div class="container">
+            @Html.Partial("~/Views/SanPham/SanPhamStyle2.cshtml", listLTM)
+        </div>
+    </div>
+</div>

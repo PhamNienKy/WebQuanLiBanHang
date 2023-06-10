@@ -1,0 +1,32 @@
+﻿@using WebsiteQuanLyBanHang.Models;
+@model IEnumerable<ThanhVien>
+@{
+    ViewBag.Title = "ThanhVien";
+    Layout = "~/Views/Shared/_AdminnLayout.cshtml";
+}
+
+<h2 style="position: absolute; left: 47%;">Danh sách thành viên</h2>
+<br /><hr />
+<table class="table">
+    <tr style="background:rgb(226, 105, 232)">
+        <td>Mã thành viên</td>
+        <td>Tên thành viên</td>
+        <td>Tên tài khoản</td>
+        <td>Địa chỉ</td>
+        <td>Email</td>
+        <td>SDT</td>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.MaTV</td>
+            <td>@item.HoTen</td>
+            <td>@item.TaiKhoan</td>
+            <td>@item.DiaChi</td>
+            <td>@item.Email</td>
+            <td>@item.SDT</td>
+            
+        </tr>
+    }
+</table>

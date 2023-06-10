@@ -1,0 +1,59 @@
+﻿@model WebsiteQuanLyBanHang.Models.ThanhVien
+@{
+    ViewBag.Title = "Dangky";
+    Layout = "~/Views/Shared/_ProductLayout.cshtml";
+}
+<link href="~/Content/css/StyleRegister.css" rel="stylesheet" />
+<div class=" container">
+    <div class=" register">
+        <h1>Đăng ký thành viên</h1>
+        @using (Html.BeginForm("Dangky", "Home"))
+        {
+            <div class="col-md-6 register-top-grid">
+                <div>
+                    <h4 style="color:red;">@ViewBag.error</h4>
+                    <span>Họ tên </span>
+                    @Html.TextBox("HoTen")
+                   <span> @Html.ValidationMessageFor(model => model.HoTen, "", new { @class = "text-danger" })</span>
+                </div>
+                <div>
+                    <span>Tên đăng nhập </span>
+                    @Html.TextBox("TaiKhoan")
+                    @Html.ValidationMessageFor(model => model.TaiKhoan, "", new { @class = "text-danger" })
+                    <span style="color:red">@ViewBag.errorTaikhoan</span>
+                </div>
+
+                <div>
+                    <span>Địa chỉ </span>
+                    @Html.TextBox("DiaChi")
+
+                </div>
+                <div>
+                    <span>Email</span>
+                    @Html.TextBox("Email")
+                </div>
+                <div>
+                    <span>Điện thoại </span>
+                    @Html.TextBox("SDT")
+                </div>
+                <div>
+                    <span>Mật khẩu</span>
+                    @Html.Password("MatKhau")
+                    @Html.ValidationMessageFor(model => model.MatKhau, "", new { @class = "text-danger" })
+                </div>
+                <div>
+                    <span>Nhập lại mật khẩu</span>
+                    @Html.Password("NhapLaiMatKhau")
+                    @Html.ValidationMessageFor(model => model.MatKhau, "", new { @class = "text-danger" })
+                </div>
+                <input type="submit" value="Xác nhận ">
+            </div>
+
+
+
+
+            <div class="clearfix"> </div>
+        }
+    </div>
+</div>
+
